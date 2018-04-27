@@ -1,12 +1,86 @@
 # x_or_what
 
-the  program logic is seems to be obfuscating at tje first look but after taking some time debugging and renaming the values you'll get this 
+From IDA pro..
 
 ```C
-```
-After you remove the unnecessary parts, you will have this clear code..
-```C
-
+ QTextStream::operator<<(&v31, "Input The Flag : ");
+  QTextStream::~QTextStream(&v31);
+  QTextStream::readLine(&v24, &v30);
+  v25 = QString::fromAscii_helper("44", 0xFFFFFFFFLL, v3);
+  v4 = v24;
+  if ( *v24 != 1 || *(v24 + 16) != v24 + 26 )
+  {
+    QString::realloc(&v24);
+    v4 = v24;
+  }
+  v5 = *(v4 + 16);
+  v6 = *(v4 + 8);
+  v7 = v25;
+  if ( *v25 != 1 || (v8 = v25 + 26, *(v25 + 16) != v25 + 26) )
+  {
+    QString::realloc(&v25);
+    v7 = v25;
+  }
+  v20 = *(v7 + 16);
+  v9 = alloca(v6);
+  v26 = QString::fromAscii_helper("", 0xFFFFFFFFLL, v8);
+  v10 = &v18;
+  if ( v6 >= 0 )
+  {
+    do
+    {
+      LOBYTE(v21) = QChar::toAscii(v5);
+      v11 = QChar::toAscii(v20);
+      v10 = (v10 + 1);
+      v5 = (v5 + 2);
+      *(v10 - 1) = v21 ^ v11;
+    }
+    while ( v6 >= (v10 - &v18) );
+    v12 = 0LL;
+    v21 = &v27;
+    do
+    {
+      while ( 1 )
+      {
+        QString::number(v21, *(&v18 + v12), 10);
+        v28 = v27;
+        _InterlockedIncrement(v27);
+        QString::fromAscii(&v31, " ", -1);
+        QString::append(v22, &v31);
+        if ( !_InterlockedDecrement(v31) )
+          QString::free(v31, &v31);
+        v13 = v22;
+        QString::append(&v26, v22);
+        if ( !_InterlockedDecrement(v28) )
+          QString::free(v28, v13);
+        if ( !_InterlockedDecrement(v27) )
+          break;
+        if ( v6 < ++v12 )
+          goto LABEL_17;
+      }
+      ++v12;
+      QString::free(v27, v13);
+    }
+    while ( v6 >= v12 );
+  }
+LABEL_17:
+  QDebug::QDebug(&v31, 0LL);
+  v14 = QTextStream::operator<<(v31, 34LL);
+  v15 = QTextStream::operator<<(v14, &v26);
+  QTextStream::operator<<(v15, 34LL);
+  if ( *(v31 + 32) )
+    QTextStream::operator<<(v31, 32LL);
+  QDebug::~QDebug(&v31);
+  if ( qStringComparisonHelper(&v26, "114 120 117 115 79 67 92 81 70 81 107 93 71 107 89 77 107 89 93 90 80 73 52 ") )
+  {
+    QDebug::QDebug(&v31, 0LL);
+    v16 = "Correct !!";
+  }
+  else
+  {
+    QDebug::QDebug(&v31, 0LL);
+    v16 = "Try Harder !";
+  }
 ```
 
 the program is reading the input from us, set the xor key value to 44 then do xor 
