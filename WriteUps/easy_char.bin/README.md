@@ -1,7 +1,7 @@
 # easy_char.bin
 run the binary ..
 
-```
+```assembly
 ┌─[root@parrot]─[~/crackmes/linux64-bin]
 └──╼ #./easy_char.bin 
 Usage: ./easy_char.bin Flag
@@ -12,7 +12,7 @@ Try Harder :)
 
 Using ```strings``` command we can clearly see the string ```Good job, Flag is :```
 
-```
+```assembly
 ┌─[root@parrot]─[~/crackmes/linux64-bin]
 └──╼ #strings easy_char.bin | grep "Try Harder" -A 5 -B 5 
 AUATL
@@ -30,7 +30,7 @@ deregister_tm_clones
 So the flag is generated using an algorithm inside the binary.
 Open up the binary file using any disassembler i'm using radare2 here.
 
-```
+```assembly
 ┌─[root@parrot]─[~/crackmes/linux64-bin]
 └──╼ #radare2 -d ./easy_char.bin 
 [0x7f0c6ab2f090]> aaaa
@@ -73,7 +73,7 @@ Open up the binary file using any disassembler i'm using radare2 here.
 .............
 ```
 here is our first flag putted in a plain text as a char array ```FLAG{H3E110_Fr18Nd}``` lets try it as an input..
-```
+```assembly
 ┌─[root@parrot]─[~/crackmes/linux64-bin]
 └──╼ #./easy_char.bin FLAG{H3E110_Fr18Nd}
 Good job, Flag is : 83916
