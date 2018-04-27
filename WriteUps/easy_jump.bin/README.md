@@ -2,14 +2,14 @@
 
 run the binary ..
 
-```
+```assembly
 ┌─[root@parrot]─[~/crackmes/linux64-bin]
 └──╼ #./easy_jump.bin 
 There is nothing to do here !
 ```
 
 open it up with gdb and list functions ..
-```
+```assembly
 gdb-peda$ info functions 
 All defined functions:
 
@@ -36,7 +36,7 @@ Non-debugging symbols:
 gdb-peda$ 
 ```
 here is we can see the functions named ```flag``` and ```nothing``` which located before the main function..
-```
+```assembly
 gdb-peda$ set disassembly-flavor intel
 gdb-peda$ disassemble main
 Dump of assembler code for function main:
@@ -51,9 +51,9 @@ Dump of assembler code for function main:
    0x00000000000009f2 <+26>:	ret    
 End of assembler dump.
 ```
-the main function is just calling the function ```nothing``` and exists.. so all we have to do is to call the ```flag``` function..
+the main function is just calling the function ```nothing``` and exits.. so all we have to do is to call the ```flag``` function..
 
-```
+```assembly
 gdb-peda$ b main
 Breakpoint 1 at 0x9dc
 gdb-peda$ run
